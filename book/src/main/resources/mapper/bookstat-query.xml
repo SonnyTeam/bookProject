@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="countAllBook">
+        SELECT COUNT(*)
+        FROM   tbl_book
+    </entry>
+
+    <entry key="countByGenre">
+        SELECT COUNT(genre)
+        FROM    tbl_book
+        WHERE   genre = ?
+    </entry>
+
+    <entry key="countRented">
+        SELECT COUNT(status_rent)
+        FROM    tbl_status
+        WHERE   status_rent = '대여 중'
+    </entry>
+
+    <entry key="showAllGenre">
+        SELECT DISTINCT genre
+        FROM tbl_book
+    </entry>
+
+</properties>

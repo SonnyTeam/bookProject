@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="updateStatus">
+        Update tbl_status
+           SET
+                status_rent = ?,
+                user_code = ?,
+                date_rent = ?,
+                date_return = ?,
+                date_end = ?
+         WHERE status_rent = ? AND isbn=?
+    </entry>
+
+    <entry key="updateReserveStatus">
+        Update tbl_reserve_status
+        SET
+        status_reserve = ?,
+        user_code = ?
+        WHERE isbn = ?
+    </entry>
+
+    <entry key="findUserCode">
+        SELECT
+            user_code
+          FROM tbl_user u
+         WHERE name = ?
+    </entry>
+
+
+    <entry key="findThings">
+        SELECT
+            s.user_code
+          FROM tbl_status s
+          JOIN tbl_user u
+            ON s.user_code = u.user_code
+          JOIN tbl_book b
+            ON b.isbn = s.isbn
+        WHERE subject = ?
+    </entry>
+
+    <entry key="selectStatus">
+        SELECT
+            b.subject,
+            s.status_rent,
+            s.date_rent,
+            s.date_return
+        FROM tbl_book b
+        JOIN tbl_status s ON b.ISBN = s.ISBN;
+    </entry>
+
+    <entry key="selectJoinStatus">
+        SELECT
+            A.SUBJECT,
+            B.STATUS_RENT,
+            B.DATE_RENT,
+            B.DATE_RETURN,
+            B.ISBN,
+            B.USER_CODE,
+            B.DATE_END
+        FROM
+            TBL_BOOK A
+        JOIN TBL_STATUS B
+        ON
+            A.ISBN = B.ISBN
+        WHERE
+            A.SUBJECT = ?
+    </entry>
+
+    <entry key="selectReserve">
+        SELECT
+            status_reserve
+          FROM tbl_reserve_status
+         WHERE isbn = ?
+    </entry>
+
+    <entry key="selectUser">
+        SELECT
+            name,
+            phone,
+            user_code
+          FROM tbl_user
+         WHERE name = ?
+    </entry>
+
+    <entry key="selectBorrowedUser">
+        SELECT
+            B.subject
+          FROM tbl_book B
+          JOIN tbl_status S
+           ON S.ISBN = B.ISBN
+         WHERE S.user_code = ?
+            AND S.status_rent like '%중'
+    </entry>
+
+    <entry key="selectAllUser">
+        SELECT
+            name,
+            phone,
+            user_code
+        FROM tbl_user
+    </entry>
+
+    <entry key="deleteUser">
+        DELETE FROM tbl_user
+              WHERE name = ?
+    </entry>
+
+    <entry key="updatePhone">
+        UPDATE tbl_user
+           SET phone = ?
+         WHERE name = ?
+    </entry>
+
+    <entry key="insertHistory">
+        INSERT INTO TBL_HISTORY
+            VALUES
+            (?, ?, ?, ?, ?, ?, ?)
+    </entry>
+
+
+
+    <entry key="selectHistory">
+        SELECT
+            b.isbn,
+            b.subject,
+            h.user_code user_rent,
+            h.status_rent,
+            h.status_reserve,
+            h.date_rent,
+            h.date_return,
+            h.date_end
+        FROM tbl_history h
+        JOIN tbl_book b ON b.isbn = h.isbn
+        LEFT JOIN tbl_status s ON s.user_code = h.user_code
+        LEFT JOIN tbl_reserve_status r ON r.user_code = h.user_code;
+    </entry>
+
+    <entry key="selectUserName">
+        SELECT
+            CASE
+                WHEN ? IS NULL THEN NULL
+                ELSE (SELECT name FROM tbl_user WHERE user_code = ?)
+        END AS name;
+    </entry>
+
+    <entry key="selectReserveHistory">
+        SELECT
+            u.name
+        FROM tbl_reserve_status r
+        JOIN tbl_user u
+        ON r.user_code = u.user_code
+        WHERE r.status_reserve = ?
+    </entry>
+
+    <entry key="deleteUserStatus">
+        DELETE FROM tbl_status
+        WHERE user_code = ?
+    </entry>
+
+    <entry key="deleteUserReserveStatus">
+        DELETE FROM tbl_reserve_status
+        WHERE user_code = ?
+    </entry>
+
+    <entry key="deleteUserOverdue">
+        DELETE FROM tbl_overdue
+        WHERE user_code = ?
+    </entry>
+
+</properties>

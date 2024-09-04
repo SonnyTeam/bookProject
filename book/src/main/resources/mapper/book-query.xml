@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="rentalable">
+        UPDATE TBL_STATUS
+        SET STATUS_RENT = ?, DATE_RENT = ?, DATE_RETURN = ?, DATE_END = ?, USER_CODE = ?
+        WHERE ISBN = ?
+    </entry>
+    <entry key="rentalable_reserve">
+        UPDATE TBL_RESERVE_STATUS
+        SET STATUS_RESERVE = ?
+        WHERE ISBN = ?
+    </entry>
+
+    <entry key="returnBook">
+        UPDATE TBL_STATUS
+        SET STATUS_RENT = ?, DATE_RETURN = ?
+        WHERE ISBN = ?
+    </entry>
+<!--    <entry key="returnBook_reserve">
+        UPDATE TBL_RESERVE_STATUS
+        SET STATUS_RESERVE = ?
+        WHERE ISBN = ?
+    </entry>-->
+
+    <entry key="titleSearch">
+
+        SELECT
+        A.* , B.STATUS_RENT<!--, B.STATUS_RESERVE-->
+        FROM
+        TBL_BOOK A JOIN TBL_STATUS B
+        ON
+        A.ISBN = B.ISBN
+        WHERE
+        A.SUBJECT = ?
+    </entry>
+    <entry key="allSearch">
+        SELECT
+        A.* , B.STATUS_RENT<!--, B.STATUS_RESERVE-->
+        FROM
+        TBL_BOOK A JOIN TBL_STATUS B
+        ON
+        A.ISBN = B.ISBN
+    </entry>
+
+    <entry key="loginCheck">
+        SELECT  user_code
+        FROM    tbl_user
+        WHERE   user_id = ? AND
+        user_pwd = ?
+    </entry>
+    <entry key="authorsearch">
+        SELECT
+        A.* , B.STATUS_RENT <!--, B.STATUS_RESERVE-->
+        FROM
+        TBL_BOOK A JOIN TBL_STATUS B
+        ON
+        A.ISBN = B.ISBN
+        WHERE
+        A.AUTHOR = ?
+
+    </entry>
+    <entry key="yearsearch">
+        SELECT
+        A.* , B.STATUS_RENT<!--, B.STATUS_RESERVE-->
+        FROM
+        TBL_BOOK A JOIN TBL_STATUS B
+        ON
+        A.ISBN = B.ISBN
+        WHERE
+        A.PUBLIC_YEAR = ?
+
+    </entry>
+    <entry key="checkbookstatus"> <!--책 대여 여부 확인하는 xml -->
+        SELECT
+            STATUS_RENT,
+            DATE_END,
+            USER_CODE
+        FROM
+            TBL_STATUS
+        WHERE
+            ISBN = ?
+    </entry>
+
+    <entry key="checkbookReserve"> <!--책 예약 여부 확인하는 xml -->
+        SELECT
+            STATUS_RESERVE
+        FROM
+            TBL_RESERVE_STATUS
+        WHERE
+            ISBN = ?
+    </entry>
+    <entry key="setReserve">
+        UPDATE TBL_RESERVE_STATUS
+        SET STATUS_RESERVE = ?,
+            USER_CODE = ?
+        WHERE ISBN = ?
+
+    </entry>
+
+
+    <entry key="genresearch">
+        SELECT
+        A.* , B.STATUS_RENT
+        FROM
+        TBL_BOOK A JOIN TBL_STATUS B
+        ON
+        A.ISBN = B.ISBN
+        WHERE
+        A.GENRE = ?
+    </entry>
+
+    <entry key="signUpController">
+        INSERT into tbl_user(
+        user_code,
+        name,
+        phone,
+        user_id,
+        user_pwd
+        )VALUES (
+        NULL,
+        ?,
+        ?,
+        ?,
+        ?
+        )
+    </entry>
+
+    <entry key="findUsercode">
+        SELECT user_code
+          FROM tbl_user
+         WHERE user_id = ?
+    </entry>
+
+    <entry key="findISBN">
+        SELECT ISBN
+          FROM TBL_BOOK
+         WHERE SUBJECT = ?
+    </entry>
+
+    <entry key="overduelist">
+        SELECT
+        C.SUBJECT,
+        B.NAME,
+        A.DATE_OVERDUE,
+        A.FEE
+        FROM
+        TBL_OVERDUE A
+        JOIN
+        TBL_USER B ON A.USER_CODE = B.USER_CODE
+        JOIN
+        TBL_BOOK C ON A.ISBN = C.ISBN;
+    </entry>
+    <entry key="keyAndval">
+        SELECT
+        ISBN,
+        DATE_END,
+        STATUS_RENT
+        FROM TBL_STATUS;
+
+    </entry>
+    <entry key="autoinsert">
+        INSERT INTO
+        tbl_overdue (ISBN, user_code, fee, date_overdue)
+        VALUES (?, ?, ?, ?)
+    </entry>
+    <entry key="overduestatus">
+        update tbl_status
+        set overdue_status = 'Y'
+        where isbn = ?
+    </entry>
+    <entry key="finduserbyisbn">
+        SELECT
+        user_code
+        FROM
+        tbl_status
+        WHERE
+        ISBN = ?
+    </entry>
+
+    <entry key="showUserInfo">
+        SELECT *
+        FROM tbl_user
+        WHERE user_code = ?
+    </entry>
+
+    <entry key="showRentedList">
+        SELECT A.subject, B.date_rent, B.date_end, B.overdue_status
+        FROM tbl_status B
+        JOIN tbl_book A
+        ON A.ISBN = B.ISBN
+        WHERE user_code = ?
+        AND status_rent = '대여 중'
+    </entry>
+
+    <entry key="showOverdueList">
+        SELECT A.subject, B.fee, B.date_overdue
+        FROM tbl_overdue B
+        JOIN tbl_book A
+        ON A.ISBN = B.ISBN
+        WHERE user_code = ?
+    </entry>
+
+    <entry key="showReservedList">
+        SELECT A.subject
+        FROM tbl_reserve_status B
+        JOIN tbl_book A
+        ON A.ISBN = B.ISBN
+        WHERE user_code = ?
+    </entry>
+
+</properties>
