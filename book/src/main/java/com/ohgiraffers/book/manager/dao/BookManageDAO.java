@@ -67,7 +67,7 @@ public class BookManageDAO {
         return result;
     }
 
-    public int updateBook(Connection con, int isbn, BookDTO bookDTO) {
+    public int updateBook(Connection con, String subject, BookDTO bookDTO) {
         PreparedStatement pstmt = null;
         int result = 0;
 
@@ -92,7 +92,7 @@ public class BookManageDAO {
             query = query + "pages = " + bookDTO.getPages() + ", ";
         }
         query = query.substring(0,query.length()-2);
-        query = query + " WHERE ISBN = " + isbn;
+        query = query + " WHERE subject = '" + subject + "'";
 
 //        System.out.println(query);
 
@@ -112,20 +112,28 @@ public class BookManageDAO {
         return result;
     }
 
-    public int selectByISBN(Connection con, int isbn) {
+    public BookDTO selectBySubject(Connection con, String subject) {
         PreparedStatement pstmt = null;
         ResultSet rset = null;
+        BookDTO bookDTO = new BookDTO();
+
         try {
-            pstmt = con.prepareStatement(prop.getProperty("selectByISBN"));
-            pstmt.setInt(1, isbn);
+            pstmt = con.prepareStatement(prop.getProperty("selectBySubject"));
+            pstmt.setString(1, subject);
             rset = pstmt.executeQuery();
             if (!rset.next()) {
-                System.out.println("ISBN " + isbn + " 에 해당하는 도서가 없습니다.");
-                return 0;
+                System.out.println(subject + " 에 해당하는 도서가 없습니다.");
             }
 
             do {
                 System.out.println("제목 : " + rset.getString("subject") + ", 저자 : " + rset.getString("author") + ", 출판사 : " + rset.getString("publisher") + ", 출판연도 : " + rset.getInt("public_year") + ", 장르 : " + rset.getString("genre") + ", 페이지수 : " + rset.getInt("pages"));
+                bookDTO.setSubject(rset.getString("subject"));
+                bookDTO.setAuthor(rset.getString("author"));
+                bookDTO.setPublisher(rset.getString("publisher"));
+                bookDTO.setPublic_year(rset.getInt("public_year"));
+                bookDTO.setGenre(rset.getString("genre"));
+                bookDTO.setPages(rset.getInt("pages"));
+
             } while (rset.next());
 
 
@@ -136,7 +144,7 @@ public class BookManageDAO {
             close(pstmt);
             close(rset);
         }
-        return 1;
+        return bookDTO;
     }
 
     public int insertOrDeleteBookStatus(Connection con, int ISBN, int num) {

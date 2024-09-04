@@ -109,11 +109,10 @@ public class BookManageController {
 
         uloop :while (true) {
 //            System.out.println("도서 수정을 시작");
-            System.out.println("수정할 도서의 ISBN을 입력 : ");
-            int isbn = scr.nextInt();
-            scr.nextLine();
-            int exist =bookManageDAO.selectByISBN(getConnection(), isbn);
-            if(exist == 0){continue;}
+            System.out.println("수정할 도서의 제목을 입력 : ");
+            String subject =scr.nextLine();
+            bookDTO =bookManageDAO.selectBySubject(getConnection(), subject);
+            if(bookDTO.getPages() == 0){continue;}
 
             System.out.println("수정 내용 입력\n수정불필요 항목은 ENTER로 스킵!!!");
             System.out.println("수정할 도서의 제목을 입력 : ");
@@ -122,37 +121,30 @@ public class BookManageController {
             bookDTO.setAuthor(scr.nextLine());
             System.out.println("수정할 도서의 출판사를 입력 : ");
             bookDTO.setPublisher(scr.nextLine());
+
             System.out.println("수정할 도서의 출판연도를 입력 : ");
-            try {
-                String public_year = scr.nextLine();
-                if (public_year.equals("")) {
-                    bookDTO.setPublic_year(0, "skip");
-                }
-                else{
-                    bookDTO.setPublic_year(Integer.parseInt(public_year));
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            String public_year = scr.nextLine();
+            if (public_year.equals("")) {
+                bookDTO.setPublic_year(0, "skip");
+            }
+            else{
+                bookDTO.setPublic_year(Integer.parseInt(public_year));
             }
 
             System.out.println("수정할 도서의 장르를 입력 : ");
             bookDTO.setGenre(scr.nextLine());
             System.out.println("수정할 도서의 페이지수를 입력 : ");
-            try {
-                String genre = scr.nextLine();
-                if(genre.equals("")){
-                    bookDTO.setPages(0,"skip");
-                }
-                else {
-                    bookDTO.setPages(Integer.parseInt(genre));
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            String genre = scr.nextLine();
+            if(genre.equals("")){
+                bookDTO.setPages(0,"skip");
+            } else {
+                bookDTO.setPages(Integer.parseInt(genre));
             }
 
-            result = bookManageDAO.updateBook(getConnection(), isbn, bookDTO);
+            result = bookManageDAO.updateBook(getConnection(), subject, bookDTO);
             if(result == 1){
                 System.out.println("도서 수정을 완료했습니다.");
+                bookManageDAO.selectBySubject(getConnection(), subject);
                 break uloop;
             }else {
                 System.out.println("도서 수정 실패");

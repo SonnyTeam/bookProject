@@ -79,19 +79,22 @@ public class BookDTO {
         return this;
     }
 
-    public BookDTO setPublic_year(int public_year, String... a) throws Exception {
+    public BookDTO setPublic_year(int public_year, String... a) {
         Calendar calendar = Calendar.getInstance();
 
         if(public_year < 0){
-            throw new Exception("음수입니다.");
+            System.out.println("출판연도는 음수일수 없습니다.");
+            this.public_year = 0;
         }else if(public_year > calendar.get(Calendar.YEAR)) {
-            throw new Exception("미래의 책입니다.");
+            System.out.println("미래의 책입니다.");
+            this.public_year = 0;
         }else if(public_year == 0){
             if(a[0].equals("skip")){
                 this.public_year = public_year;
             }
             else {
-                throw new Exception("출판연도는 0 일 수 없습니다.");
+                System.out.println("출판연도는 0 일 수 없습니다.");
+                this.public_year = 0;
             }
         }
         else {
@@ -109,13 +112,14 @@ public class BookDTO {
         return this;
     }
 
-    public BookDTO setPages(int pages, String... a) throws Exception {
+    public BookDTO setPages(int pages, String... a) {
         if(pages <= 0){
             if(a[0].equals("skip")){
                 this.pages = pages;
             }
             else {
-                throw new Exception("페이지수는 양수여야 합니다~~~");
+                System.out.println("페이지수는 양수여야 합니다~~~");
+                this.pages = 0;
             }
         } else {
             this.pages = pages;
