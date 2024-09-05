@@ -112,19 +112,8 @@
     </entry>
 
     <entry key="signUpController">
-        INSERT into tbl_user(
-        user_code,
-        name,
-        phone,
-        user_id,
-        user_pwd
-        )VALUES (
-        NULL,
-        ?,
-        ?,
-        ?,
-        ?
-        )
+        INSERT into tbl_user(user_code, name, phone, user_id, user_pwd)
+        VALUES (NULL, ?, ?, ?, ?)
     </entry>
 
     <entry key="findUsercode">

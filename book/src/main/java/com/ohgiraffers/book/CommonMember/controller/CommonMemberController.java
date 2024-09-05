@@ -1,6 +1,7 @@
 package com.ohgiraffers.book.CommonMember.controller;
 
 import com.ohgiraffers.book.CommonMember.dao.CommonMemberDAO;
+import com.ohgiraffers.book.login.dao.SignUpDAO;
 import com.ohgiraffers.book.login.dto.UserDTO;
 
 import java.util.Scanner;
@@ -11,6 +12,7 @@ public class CommonMemberController {
 
 
     public CommonMemberDAO dao = new CommonMemberDAO("src/main/resources/mapper/book-query.xml");
+    private SignUpDAO signUpDAO = new SignUpDAO("src/main/resources/mapper/book-query.xml");
 
 
     public String rental(int a){ //책 대여
@@ -64,8 +66,18 @@ public class CommonMemberController {
         userDTO.setName(scr.nextLine());
         System.out.println("전화번호를 입력 : ");
         userDTO.setPhone(scr.nextLine());
-        System.out.println("id를 입력 : ");
-        userDTO.setUser_id(scr.nextLine());
+        while (true){
+            System.out.println("id를 입력 : ");
+            userDTO.setUser_id(scr.nextLine());
+            int result =signUpDAO.signUpIDCheck(getConnection(), userDTO);
+            if(result == 0){
+                System.out.println("ID 체크 완료!!\n중복되는 ID가 없습니다.");
+                break;
+            }else {
+                System.out.println(userDTO.getUser_id() + " 은/는 이미 사용중인 ID 입니다. ID 를 다시 입력해주세요.");
+            }
+        }
+
         System.out.println("password를 입력 : ");
         userDTO.setUser_pwd(scr.nextLine());
 

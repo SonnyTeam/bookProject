@@ -18,6 +18,12 @@
         WHERE ISBN = ?
     </entry>
 
+    <entry key="selectBySubject">
+        SELECT *
+        FROM tbl_book
+        WHERE subject = ?
+    </entry>
+
     <entry key="findISBN">
         SELECT ISBN
         FROM TBL_BOOK
