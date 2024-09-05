@@ -58,6 +58,7 @@ public class ManagerUI {
 
         sloop: while(true){
             Scanner scr = new Scanner(System.in);
+            System.out.println("==========================================");
             System.out.println("1. 도서 총 개수");
             System.out.println("2. 장르별 도서 개수");
             System.out.println("3. 대여 중인 도서 개수");
@@ -87,6 +88,7 @@ public class ManagerUI {
 
         mloop: while(true){
             Scanner scr = new Scanner(System.in);
+            System.out.println("==========================================");
             System.out.println("1. 도서 정보 검색");
             System.out.println("2. 도서 추가");
             System.out.println("3. 도서 수정");
@@ -119,6 +121,7 @@ public class ManagerUI {
         Scanner scr = new Scanner(System.in);
 
         bsloop:while(true){
+            System.out.println("==========================================");
             System.out.println("1. 제목 검색");
             System.out.println("2. 저자 검색");
             System.out.println("3. 출판연도 검색");
@@ -155,6 +158,7 @@ public class ManagerUI {
         loop:while(true){
 
             Scanner scr = new Scanner(System.in);
+            System.out.println("==========================================");
             System.out.println("1. 도서 상태 변경");
             System.out.println("2. 도서 상태 변경이력 조회");
             System.out.println("9. 이전으로 돌아가기");
@@ -181,6 +185,7 @@ public class ManagerUI {
 
         loop : while(true){
             Scanner scr = new Scanner(System.in);
+            System.out.println("==========================================");
             System.out.println("1. 회원 검색");
             System.out.println("2. 회원 삭제");
             System.out.println("3. 전체 회원 리스트 보기");
@@ -202,6 +207,7 @@ public class ManagerUI {
     public void overDue(){
         OverdueController overdueController = new OverdueController();
         Scanner sc = new Scanner(System.in);
+        System.out.println("==========================================");
         System.out.println("1. 연체중인 회원 리스트조회");
         System.out.println("2. 연체회원 새로고침");
         int num = sc.nextInt();

@@ -59,7 +59,7 @@ public class CommonMemberController {
         Scanner scr = new Scanner(System.in);
         System.out.println("===나의 정보 수정===");
         UserDTO userDTO = dao.showUserInfo(getConnection(), userCode);
-        System.out.println("현재 나의 정보 : " + userDTO);
+        System.out.println("현재 나의 정보 : \n" + userDTO);
         System.out.println("수정 내용 입력\n수정불필요 항목은 ENTER로 스킵!!!");
 
         System.out.println("이름을 입력 : ");
@@ -71,6 +71,9 @@ public class CommonMemberController {
             userDTO.setUser_id(scr.nextLine());
             int result =signUpDAO.signUpIDCheck(getConnection(), userDTO);
             if(result == 0){
+                if(userDTO.getUser_id()==null){
+                    break;
+                }
                 System.out.println("ID 체크 완료!!\n중복되는 ID가 없습니다.");
                 break;
             }else {

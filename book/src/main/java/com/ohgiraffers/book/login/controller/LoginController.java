@@ -17,7 +17,7 @@ public class LoginController {
         Scanner scr = new Scanner(System.in);
         UserDTO userDTO = new UserDTO();
         CommonMemberUI commonMemberUI = new CommonMemberUI();
-        System.out.println("--------------로그인-----------------");
+        System.out.println("---------------로그인-----------------");
         System.out.println("ID 입력 : ");
         userDTO.setUser_id(scr.nextLine());
         System.out.println("Password 입력 : ");

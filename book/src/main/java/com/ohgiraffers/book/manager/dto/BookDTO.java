@@ -129,13 +129,12 @@ public class BookDTO {
 
     @Override
     public String toString() {
-        return "BookDTO{" +
-                "subject='" + subject + '\'' +
-                ", author='" + author + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", public_year=" + public_year +
-                ", genre='" + genre + '\'' +
-                ", pages=" + pages +
-                '}';
+        return
+                "책제목 : " + subject +
+                " | 저자 : " + author +
+                " | 출판사 : " + publisher +
+                " | 출판연도 : " + public_year +
+                " | 장르 : " + genre +
+                " | 페이지수 : " + pages;
     }
 }
