@@ -34,6 +34,7 @@ public class UserDAO {
         List<String> borrowedList;
 
         try {
+            // 이름으로 사용자 전화번호, 유저코드 찾기
             pstmt = con.prepareStatement(prop.getProperty("selectUser"));
             pstmt.setString(1, name);
             rset = pstmt.executeQuery();
@@ -55,7 +56,7 @@ public class UserDAO {
 
             }
 
-
+            // 유저코드로 대여 중인 책 찾기
             pstmt = con.prepareStatement(prop.getProperty("selectBorrowedUser"));
             pstmt.setInt(1, userCode);
             rset = pstmt.executeQuery();
@@ -71,7 +72,7 @@ public class UserDAO {
 
 
         } catch (Exception e) {
-            System.out.println("오류!! "+ e.getMessage()+"이전으로 돌아갑니다");
+            System.out.println("오류!! "+ e.getMessage()+"이전으로 돌아갑니다.");
             // throw new RuntimeException(e);
         } finally {
             close(con);
@@ -84,31 +85,7 @@ public class UserDAO {
     }
 
 
-    public int updateUser(Connection con, String name, String phone) {
-        PreparedStatement pstmt = null;
-        int result = 0;
 
-        // 연락처 바꾸기
-        try {
-            // 진짜 수정 시 주석처리
-            // con.setAutoCommit(false);
-            pstmt = con.prepareStatement(prop.getProperty("updatePhone"));
-            pstmt.setString(1, phone);
-            pstmt.setString(2, name);
-            result = pstmt.executeUpdate();
-
-            // 진짜 수정 시 주석처리
-            // con.rollback();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close(con);
-            close(pstmt);
-        }
-
-
-        return result;
-    }
 
     public int deleteUser(Connection con, String name) {
 
@@ -150,17 +127,18 @@ public class UserDAO {
         List<Integer> userCode = new ArrayList<>();
 
         try {
+            // 이름, 연락처, 사용자코드 가져오기
             pstmt = con.prepareStatement(prop.getProperty("selectAllUser"));
             rset = pstmt.executeQuery();
 
 
             while(rset.next()){
-
                 userName.add(rset.getString(1));
                 userPhone.add(rset.getString(2));
                 userCode.add(rset.getInt(3));
             }
 
+            // 대여 중인 책제목 가져오기
             pstmt = con.prepareStatement(prop.getProperty("selectBorrowedUser"));
 
             for (int i = 0; i < userCode.size(); i++) {
@@ -170,7 +148,7 @@ public class UserDAO {
                 List<String> subject = new ArrayList<>();
                 while (rset.next()) {
                     String bookTitle = rset.getString(1);
-                    subject.add(bookTitle != null ? bookTitle : "");  // Null일 경우 빈 문자열 추가
+                    subject.add(bookTitle != null ? bookTitle : "");
                 }
                 borrowedList.add(subject);
 
@@ -198,6 +176,7 @@ public class UserDAO {
         int userCode = 0;
 
         try {
+            // 유저코드 찾기
             pstmt = con.prepareStatement(prop.getProperty("findUserCode"));
             pstmt.setString(1, name);
             rset = pstmt.executeQuery();
