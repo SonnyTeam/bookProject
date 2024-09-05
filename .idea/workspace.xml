@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36960899-798b-4d97-831a-2c3d46d23e57" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="36960899-798b-4d97-831a-2c3d46d23e57" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,8 +86,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/SonnyTeam/book.git",
-    "accountId": "dddfde5d-5f96-46fc-8106-40e6a33576df"
+    "url": "https://github.com/SonnyTeam/bookProject.git",
+    "accountId": "f3c3612b-9d06-40d8-a8f7-349808e06239"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -108,7 +106,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/20240801-gnagnam/yam/book/book/book",
+    "last_opened_file_path": "C:/20240801-gangnam/bookProject/book",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
@@ -123,7 +121,7 @@
     "애플리케이션.Application.executor": "Run"
   }
 }]]></component>
-  <component name="RunManager" selected="애플리케이션.Application (1)">
+  <component name="RunManager" selected="Application.App2">
     <configuration name="App2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ohgiraffers.user.dto.App2" />
       <module name="book.main" />
@@ -165,15 +163,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="애플리케이션.App2" />
-      <item itemvalue="애플리케이션.Application" />
-      <item itemvalue="애플리케이션.Application (1)" />
+      <item itemvalue="Application.App2" />
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Application.Application (1)" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="애플리케이션.Application (1)" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -199,6 +192,7 @@
       <workItem from="1725369023971" duration="1782000" />
       <workItem from="1725370879106" duration="10498000" />
       <workItem from="1725413095355" duration="106000" />
+      <workItem from="1725495836690" duration="13000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <option name="closed" value="true" />

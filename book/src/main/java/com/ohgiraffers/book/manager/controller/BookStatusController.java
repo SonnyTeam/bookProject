@@ -8,8 +8,8 @@ import java.util.Scanner;
 import static com.ohgiraffers.book.JDBCTemplate.JDBCTemplate.getConnection;
 
 public class BookStatusController {
+
     /*
-    *
     * **도서 상태 관리**
     - 도서의 상태(대여 중, 대여 가능, 예약 중 등)를 관리할 수 있어야 한다.
     - 도서 상태 변경 이력을 기록하고 조회할 수 있는 기능을 추가한다.
@@ -21,7 +21,6 @@ public class BookStatusController {
     // 도서 상태 관리
     public void updateStatus(){
 
-        // 관리자 기능 중 선택 후..
         Scanner scr = new Scanner(System.in);
         System.out.println("도서 상태 변경을 시작합니다....");
         loop:while(true){
@@ -31,7 +30,7 @@ public class BookStatusController {
             StatusDTO statusDTO = bookStatusDAO.getStatusDTO(getConnection(), subject);
             String currentStatus = statusDTO.getStatus_rent();
 
-            if(currentStatus==null || currentStatus.equals("")){
+            if(currentStatus == null || currentStatus.equals("")){
                 System.out.println("없는 책입니다. 다시 입력해주세요.");
                 continue;
             }
@@ -42,14 +41,13 @@ public class BookStatusController {
 
                 if(currentStatus.equals("대여 중")){
 
-                        System.out.println("해당 도서는 " + currentStatus + " 상태 입니다.");
-                        //System.out.println("해당 도서는 " + currentStatus + " 상태 입니다. 반납하시겠습니까?");
-
+                    System.out.println("해당 도서는 " + currentStatus + " 상태 입니다.");
                     System.out.println("1.반납 2.예약");
+
                     int choice = scr.nextInt();
                     switch(choice){
-                        case 1: answer=1; break;
-                        case 2: answer=3; break;
+                        case 1: answer = 1; break;
+                        case 2: answer = 3; break;
                     }
                 }else {
                     System.out.println("해당 도서는 " + currentStatus + " 상태 입니다. 대여하시겠습니까?");
