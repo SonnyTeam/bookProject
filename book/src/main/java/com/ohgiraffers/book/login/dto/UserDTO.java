@@ -79,11 +79,11 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", user_pwd='" + user_pwd + '\'' +
-                '}';
+        return
+                "이름 : " + name +
+                        " | 전화번호 : " + phone +
+                        " | ID : " + user_id +
+                        " | password : " + user_pwd;
+
     }
 }

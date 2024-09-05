@@ -12,6 +12,7 @@ public class CommonMemberUI {
     public String userUI(int a){
         int userCode = a;
         loop:while(true){
+            System.out.println("==========================================");
             System.out.println("일반 회원 메뉴");
             System.out.println("1. 도서 검색");
             System.out.println("2. 대여");
@@ -49,7 +50,7 @@ public class CommonMemberUI {
 
     private void mypage(int userCode) {
         myloop:while(true) {
-            System.out.println("===마이페이지===");
+            System.out.println("===========마이페이지============");
             System.out.println("1. 내 정보 수정");
             System.out.println("2. 대여 중인 책 목록");
             System.out.println("3. 예약 중인 책 목록");
@@ -81,6 +82,7 @@ public class CommonMemberUI {
     public void searchBook(){
 
         loop:while (true) {
+            System.out.println("==========================================");
 
             System.out.println("1. 제목 검색");
             System.out.println("2. 저자 검색");

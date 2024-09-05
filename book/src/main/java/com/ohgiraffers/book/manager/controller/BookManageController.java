@@ -82,12 +82,12 @@ public class BookManageController {
         int ISBN = bookManageDAO.findISBN(getConnection(), subject);
         int num = bookManageDAO.insertOrDeleteBookStatus(getConnection(), ISBN, 2);
         if(num == 0){
-            System.out.println("도서 상태 삭제 실패");
+            System.out.println("도서 상태 삭제 실패 ----- 도서가 현재 대여중");
         }else {
             System.out.println("도서 상태 삭제 완료!");
             int result1 = bookManageDAO.insertOrdeleteBookReserveStatus(getConnection(), ISBN, 2);
             if(result1 == 0) {
-                System.out.println("도서 예약 상태 삭제 실패");
+                System.out.println("도서 예약 상태 삭제 실패 ---- 도서가 현재 예약중");
             } else {
                 System.out.println("도서 예약 상태 삭제 완료!!");
                 int result = bookManageDAO.deleteBook(getConnection(), subject);
@@ -144,7 +144,12 @@ public class BookManageController {
             result = bookManageDAO.updateBook(getConnection(), subject, bookDTO);
             if(result == 1){
                 System.out.println("도서 수정을 완료했습니다.");
-                bookManageDAO.selectBySubject(getConnection(), subject);
+                if(bookDTO.getSubject()==null){
+                    bookManageDAO.selectBySubject(getConnection(), subject);
+
+                }else {
+                    bookManageDAO.selectBySubject(getConnection(), bookDTO.getSubject());
+                }
                 break uloop;
             }else {
                 System.out.println("도서 수정 실패");
